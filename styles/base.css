@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-heading);
+
+  background-color: var(--bg-page);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--text-md);
+  font-weight: 400;
+
+  color: var(--text-heading); /* black */
+}
