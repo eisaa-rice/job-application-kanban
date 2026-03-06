@@ -8,15 +8,17 @@
 
     <link rel="stylesheet" href="/styles/base.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
-    <link rel="stylesheet" href="/styles/kanban.css" />
+    <link rel="stylesheet" href="/styles/components/kanban.css" />
+    <link rel="stylesheet" href="/styles/components/modal.css" />
 
-    <script type="module" src="/scripts/kanban.js" defer></script>
-    <script type="module" src="/scripts/dragAndDrop.js" defer></script>
+    <script type="module" src="/scripts/app.js" defer></script>
+    <!-- <script type="module" src="/scripts/" defer></script> -->
   </head>
 
+  <!-- TODO: review at end to make sure all tags follow best semantic practices -->
   <body>
     <main class="container">
-      <section class="column apply">
+      <section id="apply" class="column">
         <div class="column__header">
           <div class="column__title-group">
             <div class="column__dot"></div>
@@ -34,7 +36,7 @@
         <div class="dropzone"></div>
       </section>
 
-      <section class="column progress">
+      <section id="progress" class="column">
         <div class="column__header">
           <div class="column__title-group">
             <div class="column__dot"></div>
@@ -63,7 +65,7 @@
         </div>
       </section>
 
-      <section class="column reject">
+      <section id="reject" class="column">
         <div class="column__header">
           <div class="column__title-group">
             <div class="column__dot"></div>
@@ -81,7 +83,7 @@
         <div class="dropzone"></div>
       </section>
 
-      <section class="column offer">
+      <section id="offer" class="column">
         <div class="column__header">
           <div class="column__title-group">
             <div class="column__dot"></div>
@@ -97,5 +99,27 @@
         <div class="dropzone"></div>
       </section>
     </main>
+
+    <button id="add-button">+</button>
+
+    <!-- TODO: figure out if we'll need a second modal for editing or if we can use this one for both -->
+    <div id="modal">
+      <div class="modal__content">
+        <div class="modal__header">
+          <p class="modal__title">Add application</p>
+
+          <button id="close-button" class="modal__close-button">×</button>
+        </div>
+
+        <form class="modal__form">
+          <input name="role" placeholder="Role name" required />
+          <input name="company" placeholder="Company" required />
+
+          <button class="modal__submit-button" type="submit">
+            Add application
+          </button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

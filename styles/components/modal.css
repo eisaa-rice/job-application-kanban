@@ -1,0 +1,56 @@
+#add-button {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2.5rem;
+
+  height: 2.5rem;
+  width: 2.5rem;
+
+  background-color: var(--surface-1);
+
+  font-size: var(--text-xl);
+
+  border: var(--border);
+  border-radius: var(--radius-full);
+}
+
+#modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+
+  background-color: rgba(0, 0, 0, 0.25);
+
+  display: none; /* default hidden, javascript sets to "flex" on click */
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__content {
+  background-color: var(--bg-page);
+
+  border-radius: var(--radius-xs);
+
+  padding: var(--space-2);
+}
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal__title {
+  font-weight: 600;
+  font-size: var(--text-lg);
+}
+.modal__close-button {
+  height: 1.5rem;
+  width: 1.5rem;
+
+  font-size: var(--text-lg);
+
+  border: var(--border);
+  border-radius: var(--radius-full);
+}
+.modal__form {
+  margin-top: var(--space-2);
+}

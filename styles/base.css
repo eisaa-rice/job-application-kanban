@@ -9,6 +9,8 @@ body {
   color: var(--text-heading);
 
   background-color: var(--bg-page);
+
+  min-height: 100vh;
 }
 
 p,
@@ -22,4 +24,8 @@ h6 {
   font-weight: 400;
 
   color: var(--text-heading); /* black */
+}
+
+button:hover {
+  cursor: pointer;
 }
