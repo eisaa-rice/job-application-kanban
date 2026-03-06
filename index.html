@@ -54,7 +54,11 @@
 
         <div class="dropzone">
           <div class="item">
-            <h2 class="item__role">Junior Software Engineer</h2>
+            <div class="item__details">
+              <h2 class="item__role">Junior Software Engineer</h2>
+
+              <button id="edit-button">Edit</button>
+            </div>
 
             <p class="item__details">
               <span class="item__company">Google</span>
@@ -106,18 +110,27 @@
     <div id="modal">
       <div class="modal__content">
         <div class="modal__header">
-          <p class="modal__title">Add application</p>
+          <p class="modal__title">Title</p>
 
-          <button id="close-button" class="modal__close-button">×</button>
+          <button class="modal__close-button">×</button>
         </div>
 
         <form class="modal__form">
-          <input name="role" placeholder="Role name" required />
-          <input name="company" placeholder="Company" required />
+          <input
+            class="modal__input"
+            name="role"
+            placeholder="Role name"
+            required
+          />
 
-          <button class="modal__submit-button" type="submit">
-            Add application
-          </button>
+          <input
+            class="modal__input"
+            name="company"
+            placeholder="Company"
+            required
+          />
+
+          <button class="modal__submit-button" type="submit">Save</button>
         </form>
       </div>
     </div>

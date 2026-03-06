@@ -26,7 +26,7 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 var(--space-2);
+  padding-left: var(--space-2);
 }
 .column__title-group {
   display: flex;
