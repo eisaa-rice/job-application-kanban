@@ -18,3 +18,6 @@ const closeModalButton = document.getElementById("close-button");
 closeModalButton.addEventListener("click", () => {
   modal.style.display = "none";
 });
+
+// TODO: render applications onto page in their respective columns
+// TODO: actually implement adding new applications (and re-rendering on change)
