@@ -1,5 +1,7 @@
 const modalForm = document.querySelector(".modal__form");
 
+const modal = document.getElementById("modal");
+
 export const closeModal = () => {
   modalForm.reset();
 

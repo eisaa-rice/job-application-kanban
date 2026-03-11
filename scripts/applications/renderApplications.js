@@ -17,11 +17,13 @@ export const renderApplications = () => {
     const item = document.createElement("div");
     item.classList.add("item");
 
+    item.setAttribute("id", application.id);
+
     item.innerHTML = `
     <div class="item__details">
       <h2 class="item__role">${application.role}</h2>
 
-      <button id="edit-button">Edit</button>
+      <button class="item__button">Edit</button>
     </div>
 
     <p class="item__details">

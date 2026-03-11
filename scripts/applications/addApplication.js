@@ -4,20 +4,16 @@ import { renderApplications } from "./renderApplications.js";
 import { closeModal } from "../modal.js";
 
 let role = "";
-const applicationRoleInput = document.querySelector(
-  `.modal__input[name="role"]`,
-);
-applicationRoleInput.addEventListener("input", (event) => {
+const roleInput = document.querySelector(`.modal__input[name="role"]`);
+roleInput.addEventListener("input", (event) => {
   role = event.target.value;
 
   console.log("role: ", role); // DEBUG
 });
 
 let company = "";
-const applicationCompanyInput = document.querySelector(
-  `.modal__input[name="company"]`,
-);
-applicationCompanyInput.addEventListener("input", (event) => {
+const companyInput = document.querySelector(`.modal__input[name="company"]`);
+companyInput.addEventListener("input", (event) => {
   company = event.target.value;
 
   console.log("company: ", company); // DEBUG

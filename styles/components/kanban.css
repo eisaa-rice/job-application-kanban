@@ -75,12 +75,18 @@
 }
 
 .dropzone {
-  min-height: 1rem;
+  height: 70vh;
 
   overflow-y: auto;
 
   border: 2px dashed rgba(0, 0, 0, 0.01);
   border-radius: var(--radius-lg);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  scrollbar-width: thin;
 }
 
 .item {
