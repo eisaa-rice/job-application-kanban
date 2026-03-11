@@ -16,8 +16,7 @@ export const renderApplications = () => {
 
     const item = document.createElement("div");
     item.classList.add("item");
-
-    item.setAttribute("id", application.id);
+    item.dataset.id = application.id;
 
     item.innerHTML = `
     <div class="item__details">

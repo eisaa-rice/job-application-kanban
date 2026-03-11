@@ -1,34 +1,49 @@
-// TODO: autofill with previous info
-let role = "";
+import { applications } from "../data.js";
+
+import { renderApplications } from "./renderApplications.js";
+import { closeModal } from "../modal.js";
+
 const roleInput = document.querySelector(`.modal__input[name="role"]`);
-roleInput.addEventListener("input", (event) => {
-  role = event.target.value;
-
-  console.log("role: ", role); // DEBUG
-});
-
-let company = "";
 const companyInput = document.querySelector(`.modal__input[name="company"]`);
-companyInput.addEventListener("input", (event) => {
-  company = event.target.value;
 
-  console.log("company: ", company); // DEBUG
+let applicationId = null;
+
+document.querySelector(".container").addEventListener("click", (event) => {
+  const editButton = event.target.closest(".item__button");
+  // if there's no items on the board, there'll be no edit button to find
+  if (!editButton) return;
+
+  const item = editButton.closest(".item");
+  applicationId = item.dataset.id;
+
+  const application = applications.find((app) => app.id === applicationId);
+  if (!application) return;
+
+  roleInput.value = application.role;
+  companyInput.value = application.company;
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "flex";
 });
 
-// TODO: extract application info using id from item div attribute
-const editApplication = () => {};
+// TODO: stop code from fighting between add event listener and edit event listener
+const submitButton = document.querySelector(".modal__submit-button");
+submitButton.addEventListener("click", (event) => {
+  event.preventDefault();
 
-// TODO: apply event listener to all edit buttons on the page
-const editApplicationButton = document.getElementById("edit-button");
+  const role = roleInput.value.trim();
+  const company = companyInput.value.trim();
 
-console.log(editApplicationButton); // DEBUG
+  if (!role || !company) return;
 
-// if there's no items on the board, there'll be no edit button to find
-if (editApplicationButton) {
-  editApplicationButton.addEventListener("click", () => {
-    const modalTitle = document.querySelector(".modal__title");
-    modalTitle.textContent = "Edit Application";
+  const editingApplication = applications.find(
+    (app) => app.id === applicationId,
+  );
 
-    modal.style.display = "flex";
-  });
-}
+  editingApplication.role = role;
+  editingApplication.company = company;
+
+  renderApplications();
+
+  closeModal();
+});

@@ -3,23 +3,27 @@ import { applications } from "../data.js";
 import { renderApplications } from "./renderApplications.js";
 import { closeModal } from "../modal.js";
 
-let role = "";
 const roleInput = document.querySelector(`.modal__input[name="role"]`);
-roleInput.addEventListener("input", (event) => {
-  role = event.target.value;
-
-  console.log("role: ", role); // DEBUG
-});
-
-let company = "";
 const companyInput = document.querySelector(`.modal__input[name="company"]`);
-companyInput.addEventListener("input", (event) => {
-  company = event.target.value;
 
-  console.log("company: ", company); // DEBUG
+const addButton = document.getElementById("add-button");
+addButton.addEventListener("click", () => {
+  const modalTitle = document.querySelector(".modal__title");
+  modalTitle.textContent = "New Application";
+
+  const modal = document.getElementById("modal");
+  modal.style.display = "flex";
 });
 
-const addApplication = () => {
+const submitButton = document.querySelector(".modal__submit-button");
+submitButton.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const role = roleInput.value.trim();
+  const company = companyInput.value.trim();
+
+  if (!role || !company) return;
+
   const newApplication = {
     id: crypto.randomUUID(),
     role,
@@ -31,23 +35,6 @@ const addApplication = () => {
   applications.push(newApplication);
 
   renderApplications();
-};
 
-const addApplicationButton = document.getElementById("add-button");
-addApplicationButton.addEventListener("click", () => {
-  const modalTitle = document.querySelector(".modal__title");
-  modalTitle.textContent = "New Application";
-
-  modal.style.display = "flex";
-});
-
-const modalSubmitButton = document.querySelector(".modal__submit-button");
-modalSubmitButton.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  if (role && company) {
-    addApplication();
-
-    closeModal();
-  }
+  closeModal();
 });
