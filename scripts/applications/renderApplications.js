@@ -22,7 +22,13 @@ export const renderApplications = () => {
     <div class="item__details">
       <h2 class="item__role">${application.role}</h2>
 
-      <button class="item__button">Edit</button>
+      <button class="item__button">⁝</button>
+      
+      <div class="item__options" style="display: none;">
+        <button>✏️</button>
+
+        <button>🗑️</button>
+      </div>
     </div>
 
     <p class="item__details">

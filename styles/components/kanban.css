@@ -12,15 +12,16 @@
 .column {
   background-color: var(--surface-1);
 
-  height: fit-content;
+  height: 85vh;
 
   border: var(--border);
   border-radius: var(--radius-md);
 
   padding: var(--space-1);
-}
 
-/* column heading styles */
+  display: flex;
+  flex-direction: column;
+}
 .column__header {
   display: flex;
   align-items: center;
@@ -50,7 +51,6 @@
   color: var(--text-primary);
   font-size: var(--text-sm);
 }
-
 .column__dot {
   width: 0.625rem;
   height: 0.625rem;
@@ -75,36 +75,63 @@
 }
 
 .dropzone {
-  height: 70vh;
-
   overflow-y: auto;
 
   border: 2px dashed rgba(0, 0, 0, 0.01);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xs);
 
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 
-  scrollbar-width: thin;
+  scrollbar-width: none;
+
+  background-color: rgba(0, 0, 0, 0.01);
+  height: 100%;
 }
 
 .item {
-  background-color: var(--surface-2);
+  background-color: rgb(255, 255, 255);
 
-  box-shadow: var(--shadow);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xs);
 
   margin: 0.2rem;
   padding: 0.8rem;
-}
-.item__role {
-  font-weight: 600;
 }
 .item__details {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  position: relative;
+}
+.item__role {
+  font-weight: 600;
+}
+.item__button {
+  background: transparent;
+  border: none;
+}
+.item__options {
+  position: absolute;
+  right: 0%;
+  top: 105%;
+  z-index: 50;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+
+  box-shadow: var(--shadow);
+  border-radius: 9999px;
+
+  padding: var(--space-1);
+
+  background-color: white;
+}
+.item__options button {
+  background-color: transparent;
+  border: none;
 }
 .item__company {
   color: var(--text-secondary);

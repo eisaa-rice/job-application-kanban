@@ -1,3 +1,8 @@
+export let appliedCount = 0;
+export let inProgressCount = 0;
+export let rejectedCount = 0;
+export let offerCount = 0;
+
 export const applications = [
   {
     id: crypto.randomUUID(),
