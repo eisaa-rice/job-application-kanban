@@ -9,42 +9,45 @@ const companyInput = document.querySelector(`.modal__input[name="company"]`);
 let applicationId = null;
 
 // TODO: update code to use new item options kebab menus for modal opening
-// document.querySelector(".container").addEventListener("click", (event) => {
-//   const editButton = event.target.closest(".item__button");
-//   // if there's no items on the board, there'll be no edit button to find
-//   if (!editButton) return;
+document.querySelector(".container").addEventListener("click", (event) => {
+  const editButton = event.target.closest(".item__edit-button");
+  // if there's no items on the board, there'll be no edit button to find
+  if (!editButton) return;
 
-//   const item = editButton.closest(".item");
-//   applicationId = item.dataset.id;
+  const item = editButton.closest(".item");
+  applicationId = item.dataset.id;
 
-//   const application = applications.find((app) => app.id === applicationId);
-//   if (!application) return;
+  const application = applications.find((app) => app.id === applicationId);
+  if (!application) return;
 
-//   roleInput.value = application.role;
-//   companyInput.value = application.company;
+  roleInput.value = application.role;
+  companyInput.value = application.company;
 
-//   const modal = document.getElementById("modal");
-//   modal.style.display = "flex";
-// });
+  const modal = document.getElementById("modal");
+  modal.style.display = "flex";
+
+  const itemOptions = event.target.closest(".item__options");
+  itemOptions.style.display = "none";
+});
 
 // TODO: stop code from fighting between add event listener and edit event listener
-const submitButton = document.querySelector(".modal__submit-button");
-submitButton.addEventListener("click", (event) => {
-  event.preventDefault();
+// const submitButton = document.querySelector(".modal__submit-button");
+// submitButton.addEventListener("click", (event) => {
+//   event.preventDefault();
 
-  const role = roleInput.value.trim();
-  const company = companyInput.value.trim();
+//   const role = roleInput.value.trim();
+//   const company = companyInput.value.trim();
 
-  if (!role || !company) return;
+//   if (!role || !company) return;
 
-  const editingApplication = applications.find(
-    (app) => app.id === applicationId,
-  );
+//   const editingApplication = applications.find(
+//     (app) => app.id === applicationId,
+//   );
 
-  editingApplication.role = role;
-  editingApplication.company = company;
+//   editingApplication.role = role;
+//   editingApplication.company = company;
 
-  renderApplications();
+//   renderApplications();
 
-  closeModal();
-});
+//   closeModal();
+// });

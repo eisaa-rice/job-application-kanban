@@ -25,9 +25,9 @@ export const renderApplications = () => {
       <button class="item__button">⁝</button>
       
       <div class="item__options" style="display: none;">
-        <button>✏️</button>
+        <button class="item__edit-button">✏️</button>
 
-        <button>🗑️</button>
+        <button class="item__delete-button">🗑️</button>
       </div>
     </div>
 
