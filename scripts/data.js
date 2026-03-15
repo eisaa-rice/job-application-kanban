@@ -1,7 +1,7 @@
-export let appliedCount = 0;
-export let inProgressCount = 0;
-export let rejectedCount = 0;
-export let offerCount = 0;
+export let appliedCount = 9;
+export let inProgressCount = 3;
+export let rejectedCount = 17;
+export let offerCount = 1;
 
 export const applications = [
   {
