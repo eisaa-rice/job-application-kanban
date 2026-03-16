@@ -1,6 +1,6 @@
 import { applications } from "./data.js";
 
-// TODO: i think we can drop the add, edit, and delete functions since they're not really re-used and we can replace their singular calls() with the code within each
+// TODO: probably split this file into 2: one for modal & kebab menus and other for application crud handling
 
 // RENDER APPLICATIONS
 const renderApplications = () => {
@@ -69,6 +69,7 @@ modalBackground.addEventListener("click", (event) => {
   }
 });
 
+// KEBAB MENUS
 document.querySelector(".container").addEventListener("click", (event) => {
   const itemButton = event.target.closest(".item__button"); // .closeset traverses up DOM tree from event target
   // if there's no items on the board, there'll be no buttons to find
@@ -90,36 +91,12 @@ document.querySelector(".container").addEventListener("click", (event) => {
   }
 });
 
-// ADD & EDIT APPLICATION
 const roleInput = document.querySelector(`.modal__input[name="role"]`);
 const companyInput = document.querySelector(`.modal__input[name="company"]`);
 
 let modalMode = "add";
 
 let applicationId = null;
-
-const addApplication = (role, company) => {
-  const newApplication = {
-    id: crypto.randomUUID(),
-    role,
-    company,
-    dateApplied: new Date(),
-    status: "apply",
-  };
-
-  applications.push(newApplication);
-};
-
-const editApplication = (role, company) => {
-  if (!applicationId) return;
-
-  const editingApplication = applications.find(
-    (app) => app.id === applicationId,
-  );
-
-  editingApplication.role = role;
-  editingApplication.company = company;
-};
 
 const addButton = document.getElementById("add-button");
 addButton.addEventListener("click", () => {
@@ -158,6 +135,7 @@ document.querySelector(".container").addEventListener("click", (event) => {
   itemOptions.style.display = "none";
 });
 
+// ADD & EDIT APPLICATION
 const submitButton = document.querySelector(".modal__submit-button");
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -168,9 +146,24 @@ submitButton.addEventListener("click", (event) => {
   if (!role || !company) return;
 
   if (modalMode === "add") {
-    addApplication(role, company);
+    const newApplication = {
+      id: crypto.randomUUID(),
+      role,
+      company,
+      dateApplied: new Date(),
+      status: "apply",
+    };
+
+    applications.push(newApplication);
   } else {
-    editApplication(role, company);
+    if (!applicationId) return;
+
+    const editingApplication = applications.find(
+      (app) => app.id === applicationId,
+    );
+
+    editingApplication.role = role;
+    editingApplication.company = company;
   }
 
   renderApplications();
@@ -179,19 +172,6 @@ submitButton.addEventListener("click", (event) => {
 });
 
 // DELETE APPLICATION
-const deleteApplication = () => {
-  const indexToDelete = applications.findIndex(
-    (application) => application.id === applicationId,
-  );
-
-  console.log(indexToDelete);
-
-  // index found
-  if (indexToDelete !== -1) {
-    applications.splice(indexToDelete, 1);
-  }
-};
-
 document.querySelector(".container").addEventListener("click", (event) => {
   const deleteButton = event.target.closest(".item__delete-button");
   // if there's no items on the board, there'll be no edit button to find
@@ -200,7 +180,13 @@ document.querySelector(".container").addEventListener("click", (event) => {
   const item = deleteButton.closest(".item");
   applicationId = item.dataset.id;
 
-  deleteApplication();
+  const indexToDelete = applications.findIndex(
+    (application) => application.id === applicationId,
+  );
+
+  if (indexToDelete !== -1) {
+    applications.splice(indexToDelete, 1);
+  }
 
   renderApplications();
 });
