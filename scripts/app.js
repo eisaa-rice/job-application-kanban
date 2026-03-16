@@ -1,5 +1,7 @@
 import { applications } from "./data.js";
 
+// TODO: i think we can drop the add, edit, and delete functions since they're not really re-used and we can replace their singular calls() with the code within each
+
 // RENDER APPLICATIONS
 const renderApplications = () => {
   const columns = ["apply", "progress", "reject", "offer"];
@@ -174,4 +176,31 @@ submitButton.addEventListener("click", (event) => {
   renderApplications();
 
   closeModal();
+});
+
+// DELETE APPLICATION
+const deleteApplication = () => {
+  const indexToDelete = applications.findIndex(
+    (application) => application.id === applicationId,
+  );
+
+  console.log(indexToDelete);
+
+  // index found
+  if (indexToDelete !== -1) {
+    applications.splice(indexToDelete, 1);
+  }
+};
+
+document.querySelector(".container").addEventListener("click", (event) => {
+  const deleteButton = event.target.closest(".item__delete-button");
+  // if there's no items on the board, there'll be no edit button to find
+  if (!deleteButton) return;
+
+  const item = deleteButton.closest(".item");
+  applicationId = item.dataset.id;
+
+  deleteApplication();
+
+  renderApplications();
 });
