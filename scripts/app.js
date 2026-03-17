@@ -47,6 +47,8 @@ const renderApplications = () => {
 
 renderApplications();
 
+// TODO: replace style changes with class changes
+
 // MODAL CLOSE
 const modal = document.getElementById("modal");
 const modalForm = document.querySelector(".modal__form");
