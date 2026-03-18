@@ -1,4 +1,4 @@
-add application
+create application
 
 - button bottom right
 - opens modal
@@ -19,4 +19,4 @@ persist data with localStorage
 
 update counts in each column
 
-- on add, move around, and remove
+- on create, move around, and remove
