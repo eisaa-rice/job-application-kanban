@@ -1,4 +1,21 @@
-import { applications } from "./data.js"; // i guess this is the "read" lol
+export let applications = [];
+
+export const readApplications = () => {
+  const storedApplications = localStorage.getItem("applications");
+  if (!storedApplications) return;
+
+  applications = JSON.parse(storedApplications);
+
+  // parse string dates into javascript date objects
+  applications.forEach(
+    (application) =>
+      (application.dateApplied = new Date(application.dateApplied)),
+  );
+};
+
+const setApplications = () => {
+  localStorage.setItem("applications", JSON.stringify(applications));
+};
 
 export const createApplication = (role, company) => {
   applications.push({
@@ -8,6 +25,8 @@ export const createApplication = (role, company) => {
     dateApplied: new Date(),
     status: "apply",
   });
+
+  setApplications();
 };
 
 export const updateApplication = (applicationId, role, company) => {
@@ -19,6 +38,8 @@ export const updateApplication = (applicationId, role, company) => {
 
   application.role = role;
   application.company = company;
+
+  setApplications();
 };
 
 export const deleteApplication = (applicationId) => {
@@ -29,4 +50,6 @@ export const deleteApplication = (applicationId) => {
   if (indexToDelete === -1) return;
 
   applications.splice(indexToDelete, 1);
+
+  setApplications();
 };

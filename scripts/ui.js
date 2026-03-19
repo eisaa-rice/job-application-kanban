@@ -1,5 +1,5 @@
-import { applications } from "./data.js";
 import {
+  applications,
   createApplication,
   updateApplication,
   deleteApplication,
