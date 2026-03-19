@@ -11,6 +11,8 @@ export const createApplication = (role, company) => {
 };
 
 export const updateApplication = (applicationId, role, company) => {
+  if (!applicationId) return;
+
   const application = applications.find((app) => app.id === applicationId);
 
   if (!application) return;

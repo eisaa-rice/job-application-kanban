@@ -5,9 +5,25 @@ import {
   deleteApplication,
 } from "./crud.js";
 
-// ----------------------------------
-// APPLICATION RENDERING
-// ----------------------------------
+// dom elements
+const container = document.querySelector(".container"); // TODO: apparently it's possible to condense from 3 event listeners (kebab, edit, delete) down to 1
+const modal = document.getElementById("modal");
+const modalTitle = document.querySelector(".modal__title");
+const modalForm = document.querySelector(".modal__form");
+
+const roleInput = document.querySelector(`.modal__input[name="role"]`);
+const companyInput = document.querySelector(`.modal__input[name="company"]`);
+
+const createButton = document.getElementById("create-button");
+const submitButton = document.querySelector(".modal__submit-button");
+const closeButton = document.querySelector(".modal__close-button");
+
+// ui state
+let modalMode = "create";
+
+let applicationId = null;
+
+// item rendering
 export const renderApplications = () => {
   const columns = ["apply", "progress", "reject", "offer"];
 
@@ -33,7 +49,7 @@ export const renderApplications = () => {
       <button class="item__button">⁝</button>
 
       <div class="item__options" style="display: none;">
-        <button class="item__edit-button">✏️</button>
+        <button class="item__update-button">✏️</button>
 
         <button class="item__delete-button">🗑️</button>
       </div>
@@ -50,34 +66,32 @@ export const renderApplications = () => {
   });
 };
 
-// ----------------------------------
-// MODAL HANDLING
-// ----------------------------------
-// TODO: replace style changes with class changes
-const modal = document.getElementById("modal");
-const modalForm = document.querySelector(".modal__form");
+// open modal
+const openModal = () => {
+  modal.style.display = "flex";
+};
 
-const roleInput = document.querySelector(`.modal__input[name="role"]`);
-const companyInput = document.querySelector(`.modal__input[name="company"]`);
-
-let modalMode = "create";
-
-let applicationId = null;
-
-// open modal - create application
-const createButton = document.getElementById("create-button");
 createButton.addEventListener("click", () => {
-  const modalTitle = document.querySelector(".modal__title");
+  modalMode = "create";
   modalTitle.textContent = "New Application";
+
+  openModal();
+});
+
+// close modal
+const closeModal = () => {
+  modalForm.reset();
 
   modalMode = "create";
 
-  const modal = document.getElementById("modal");
-  modal.style.display = "flex";
-});
+  applicationId = null;
+
+  modal.style.display = "none";
+};
+
+closeButton.addEventListener("click", closeModal);
 
 // modal submit
-const submitButton = document.querySelector(".modal__submit-button");
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
 
@@ -88,44 +102,19 @@ submitButton.addEventListener("click", (event) => {
 
   if (modalMode === "create") {
     createApplication(role, company);
-  } else {
-    if (!applicationId) return;
-
+  } else if (modalMode === "update") {
     updateApplication(applicationId, role, company);
   }
 
-  renderApplications();
-
   closeModal();
+
+  renderApplications();
 });
 
-// close modal
-const closeModal = () => {
-  modalForm.reset();
-
-  modal.style.display = "none";
-};
-
-const closeModalButton = document.querySelector(".modal__close-button");
-closeModalButton.addEventListener("click", closeModal);
-
-// close modal by clicking off of it
-const modalBackground = document.getElementById("modal");
-modalBackground.addEventListener("click", (event) => {
-  // only clicking on the background should cause modal to close
-  if (event.target === event.currentTarget) {
-    closeModal();
-  }
-});
-
-// ----------------------------------
-// KEBAB MENUS
-// ----------------------------------
 // open kebab menu
-document.querySelector(".container").addEventListener("click", (event) => {
-  const itemButton = event.target.closest(".item__button"); // .closeset traverses up DOM tree from event target
-  // if there's no items on the board, there'll be no buttons to find
-  if (!itemButton) return;
+container.addEventListener("click", (event) => {
+  const itemButton = event.target.closest(".item__button"); // .closest traverses up dom tree from event target
+  if (!itemButton) return; // if there's no items on the board, there'll be no kebab buttons to be found
 
   const itemOptions = itemButton.nextElementSibling;
 
@@ -136,6 +125,7 @@ document.querySelector(".container").addEventListener("click", (event) => {
     }
   });
 
+  // and then open/close kebab menu (based on current status)
   if (itemOptions.style.display === "none") {
     itemOptions.style.display = "flex";
   } else {
@@ -143,13 +133,12 @@ document.querySelector(".container").addEventListener("click", (event) => {
   }
 });
 
-// kebab edit button
-document.querySelector(".container").addEventListener("click", (event) => {
-  const editButton = event.target.closest(".item__edit-button");
-  // if there's no items on the board, there'll be no edit button to find
-  if (!editButton) return;
+// kebab update button
+container.addEventListener("click", (event) => {
+  const updateButton = event.target.closest(".item__update-button");
+  if (!updateButton) return;
 
-  const item = editButton.closest(".item");
+  const item = updateButton.closest(".item");
   applicationId = item.dataset.id;
 
   const application = applications.find((app) => app.id === applicationId);
@@ -158,22 +147,18 @@ document.querySelector(".container").addEventListener("click", (event) => {
   roleInput.value = application.role;
   companyInput.value = application.company;
 
-  const modalTitle = document.querySelector(".modal__title");
-  modalTitle.textContent = "Edit Application";
+  modalMode = "update";
+  modalTitle.textContent = "Update Application";
 
-  modalMode = "edit";
-
-  const modal = document.getElementById("modal");
-  modal.style.display = "flex";
+  openModal();
 
   const itemOptions = event.target.closest(".item__options");
   itemOptions.style.display = "none";
 });
 
 // kebab delete button
-document.querySelector(".container").addEventListener("click", (event) => {
+container.addEventListener("click", (event) => {
   const deleteButton = event.target.closest(".item__delete-button");
-  // if there's no items on the board, there'll be no edit button to find
   if (!deleteButton) return;
 
   const item = deleteButton.closest(".item");

@@ -7,7 +7,7 @@ create application
 
 drag applications between columns
 
-edit applications
+update applications
 
 - change role name, company, and column for mobile devices
 
