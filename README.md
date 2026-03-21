@@ -20,5 +20,3 @@ persist data with localStorage
 update counts in each column
 
 - on create, move around, and remove
-
-shameless behavior present here
