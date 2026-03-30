@@ -1,0 +1,157 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(
+    4,
+    minmax(220px, 1fr)
+  ); /* greater than min (left), smaller than max (right) */
+  gap: var(--space-2);
+
+  padding: 3rem;
+}
+
+.column {
+  background-color: var(--surface-1);
+
+  height: 85vh;
+
+  border: var(--border);
+  border-radius: var(--radius-md);
+
+  padding: var(--space-1);
+
+  display: flex;
+  flex-direction: column;
+}
+.column__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-left: var(--space-2);
+}
+.column__title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.column__title {
+  font-weight: 600;
+  font-size: var(--text-lg);
+}
+.column__description {
+  color: var(--text-primary);
+  margin: var(--space-2) 0;
+}
+.column__count {
+  border: var(--border);
+  border-radius: var(--radius-full);
+
+  padding: 0.125rem 0.5rem;
+
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+}
+.column__dot {
+  width: 0.625rem;
+  height: 0.625rem;
+
+  border-radius: var(--radius-full);
+}
+#apply .column__dot {
+  background-color: var(--accent-apply);
+  box-shadow: 0 1px 10px var(--accent-apply);
+}
+#progress .column__dot {
+  background-color: var(--accent-progress);
+  box-shadow: 0 1px 10px var(--accent-progress);
+}
+#reject .column__dot {
+  background-color: var(--accent-reject);
+  box-shadow: 0 1px 10px var(--accent-reject);
+}
+#offer .column__dot {
+  background-color: var(--accent-offer);
+  box-shadow: 0 1px 10px var(--accent-offer);
+}
+
+.dropzone {
+  overflow-y: auto;
+
+  border: 2px dashed rgba(0, 0, 0, 0.01);
+  border-radius: var(--radius-xs);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  scrollbar-width: none;
+
+  background-color: rgba(0, 0, 0, 0.01);
+  height: 100%;
+}
+
+.item {
+  background-color: rgb(255, 255, 255);
+
+  border-radius: var(--radius-xs);
+
+  margin: 0.2rem;
+  padding: 0.8rem;
+}
+.item__details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+}
+.item__role {
+  font-weight: 600;
+}
+.item__button {
+  background: transparent;
+  border: none;
+}
+.item__options {
+  position: absolute;
+  right: 0%;
+  top: 105%;
+  z-index: 50;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+
+  box-shadow: var(--shadow);
+  border-radius: 9999px;
+
+  padding: var(--space-1);
+
+  background-color: white;
+}
+.item__options button {
+  background-color: transparent;
+  border: none;
+}
+.item__company {
+  color: var(--text-secondary);
+}
+.item__date {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+
+  margin-top: 1ch;
+}
+
+/* TODO: review styling below (especially media queries) */
+@media (max-width: 700px) {
+  .container {
+    grid-template-columns: 1fr;
+    margin: var(--space-2);
+  }
+}
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
