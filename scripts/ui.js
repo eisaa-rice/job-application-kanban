@@ -44,7 +44,10 @@ export const renderApplications = () => {
 
     const item = document.createElement("div");
     item.classList.add("item");
+
     item.dataset.id = application.id;
+
+    item.setAttribute("draggable", "true");
 
     item.innerHTML = `
     <div class="item__details">
@@ -53,9 +56,9 @@ export const renderApplications = () => {
       <button class="item__button">⁝</button>
 
       <div class="item__options" style="display: none;">
-        <button class="item__update-button">✏️</button>
+        <button class="item__update-button">✏️ Edit</button>
 
-        <button class="item__delete-button">🗑️</button>
+        <button class="item__delete-button">🗑️ Delete</button>
       </div>
     </div>
 

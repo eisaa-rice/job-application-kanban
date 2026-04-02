@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+
   box-sizing: border-box;
 }
 
@@ -8,7 +9,7 @@ body {
   font-family: var(--font-sans);
   color: var(--text-heading);
 
-  background-color: var(--bg-page);
+  background-color: white;
 
   min-height: 100vh;
 }
@@ -20,10 +21,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: var(--text-md);
+  font-size: 0.875rem;
   font-weight: 400;
-
-  color: var(--text-heading); /* black */
 }
 
 button:hover {
