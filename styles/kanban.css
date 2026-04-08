@@ -103,7 +103,6 @@
 }
 .item__role {
 }
-/* TODO: make kebab button invisible until user hovers an item */
 .item__button {
   background: transparent;
   border: none;
@@ -136,10 +135,12 @@
   color: var(--text-secondary);
 }
 .item__company {
-  color: var(--text-accent);
+  color: var(--text-secondary);
 }
 .item__date {
-  color: var(--text-secondary);
+  color: var(--text-accent);
+
+  font-size: 0.75rem;
 
   margin-top: 1ch;
 }

@@ -40,13 +40,13 @@
 }
 .modal__title {
   font-weight: 600;
-  font-size: var(--text-lg);
+  font-size: 1rem;
 }
 .modal__close-button {
   height: 1.5rem;
   width: 1.5rem;
 
-  font-size: var(--text-lg);
+  font-size: 1rem;
 
   border: var(--border);
   border-radius: var(--radius-xs);
