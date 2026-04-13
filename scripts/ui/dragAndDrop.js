@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Kanban_board
 
-import { updateApplication } from "./crud.js";
+import { updateApplication } from "../crud.js";
 import { renderCounts } from "./render.js";
 
 const items = document.querySelectorAll(".item");
@@ -11,7 +11,7 @@ items.forEach((item) => {
     event.dataTransfer.effectAllowed = "move";
 
     // custom data type
-    event.dataTransfer.setData("item", "");
+    event.dataTransfer.setData("item", ""); // value doesn't matter, we're just checking for the existence of the type
   });
 
   item.addEventListener("dragend", (event) => {

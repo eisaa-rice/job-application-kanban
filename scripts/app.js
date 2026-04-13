@@ -1,6 +1,6 @@
 import { readApplications } from "./crud.js";
-import { renderApplications } from "./ui.js";
+import { renderItems } from "./ui/render.js";
 
 readApplications();
 
-renderApplications();
+renderItems();

@@ -3,8 +3,10 @@ import {
   createApplication,
   updateApplication,
   deleteApplication,
-} from "./crud.js";
-import { renderCounts } from "./render.js";
+} from "../crud.js";
+import { renderItems } from "./render.js";
+
+// TODO: clean ts up
 
 // dom elements
 const container = document.querySelector(".container"); // TODO: apparently it's possible to condense from 3 event listeners (kebab, edit, delete) down to 1
@@ -23,68 +25,6 @@ const closeButton = document.querySelector(".modal__close-button");
 let modalMode = "create";
 
 let applicationId = null;
-
-// item rendering
-export const renderApplications = () => {
-  const columns = ["apply", "progress", "reject", "offer"];
-
-  // first, clear all columns
-  columns.forEach((columnId) => {
-    const dropzone = document.querySelector(`#${columnId} .dropzone`);
-
-    dropzone.innerHTML = "";
-  });
-
-  // render each application into the correct column
-  applications.forEach((application) => {
-    const dropzone = document.querySelector(`#${application.status} .dropzone`);
-
-    const item = document.createElement("li");
-    item.classList.add("item");
-
-    item.dataset.id = application.id;
-
-    item.setAttribute("draggable", "true");
-
-    // without these, new items can't be dragged and dropped
-    item.addEventListener("dragstart", (event) => {
-      item.id = "dragged-item";
-
-      event.dataTransfer.effectAllowed = "move";
-
-      // custom data type
-      event.dataTransfer.setData("item", "");
-    });
-
-    item.addEventListener("dragend", (event) => {
-      item.removeAttribute("id");
-    });
-
-    item.innerHTML = `
-    <div class="item__details">
-      <h2 class="item__role">${application.role}</h2>
-
-      <button class="item__button">⁝</button>
-
-      <div class="item__options" style="display: none;">
-        <button class="item__update-button">✏️ Edit</button>
-
-        <button class="item__delete-button">🗑️ Delete</button>
-      </div>
-    </div>
-
-    <p class="item__details">
-      <span class="item__company">${application.company}</span>
-
-      <span class="item__date">${application.dateApplied.toLocaleDateString()}</span>
-    </p>
-    `;
-
-    dropzone.appendChild(item);
-
-    renderCounts();
-  });
-};
 
 // open modal
 const openModal = () => {
@@ -128,7 +68,7 @@ submitButton.addEventListener("click", (event) => {
 
   closeModal();
 
-  renderApplications();
+  renderItems();
 });
 
 // open kebab menu
@@ -186,5 +126,5 @@ container.addEventListener("click", (event) => {
 
   deleteApplication(applicationId);
 
-  renderApplications();
+  renderItems();
 });
