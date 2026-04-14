@@ -43,7 +43,7 @@ export const renderItems = () => {
 
     item.setAttribute("draggable", "true");
 
-    // for drag-and-drop
+    // drag-and-drop
     item.addEventListener("dragstart", (event) => {
       item.id = "dragged-item";
 
@@ -76,8 +76,32 @@ export const renderItems = () => {
     </p>
     `;
 
+    // kebab menu
+    const itemButton = item.querySelector(".item__button");
+    itemButton.addEventListener("click", (event) => {
+      const currentMenu = itemButton.nextElementSibling;
+
+      // close all other kebab menus first
+      const itemOptions = document.querySelectorAll(".item__options");
+      itemOptions.forEach((menu) => {
+        if (menu !== currentMenu) {
+          menu.style.display = "none";
+        }
+      });
+
+      console.log(currentMenu);
+
+      // and then open/close kebab menu (based on current status)
+      if (currentMenu.style.display === "none") {
+        currentMenu.style.display = "flex";
+      } else {
+        currentMenu.style.display = "none";
+      }
+    });
+
     dropzone.appendChild(item);
 
     renderCounts();
   });
 };
+renderItems();

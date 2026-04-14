@@ -38,8 +38,8 @@ columns.forEach((column) => {
 
     updateApplication(draggedItemId, { status: column.id });
 
-    renderCounts();
-
     column.children[2].appendChild(draggedItem); // [div, p, ul]
+
+    renderCounts();
   });
 });

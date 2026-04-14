@@ -40,6 +40,7 @@ export const readApplications = () => {
 
   countSections();
 };
+readApplications();
 
 const saveApplications = () => {
   localStorage.setItem("applications", JSON.stringify(applications));

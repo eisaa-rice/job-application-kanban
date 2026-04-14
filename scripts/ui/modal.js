@@ -6,40 +6,29 @@ import {
 } from "../crud.js";
 import { renderItems } from "./render.js";
 
-// TODO: clean ts up
-
-// dom elements
-const container = document.querySelector(".container"); // TODO: apparently it's possible to condense from 3 event listeners (kebab, edit, delete) down to 1
-const modal = document.getElementById("modal");
-const modalTitle = document.querySelector(".modal__title");
-const modalForm = document.querySelector(".modal__form");
-
-const roleInput = document.querySelector(`.modal__input[name="role"]`);
-const companyInput = document.querySelector(`.modal__input[name="company"]`);
-
-const createButton = document.getElementById("create-button");
-const submitButton = document.querySelector(".modal__submit-button");
-const closeButton = document.querySelector(".modal__close-button");
-
-// ui state
 let modalMode = "create";
-
 let applicationId = null;
 
-// open modal
 const openModal = () => {
+  const modal = document.getElementById("modal");
+
   modal.style.display = "flex";
 };
 
+const createButton = document.getElementById("create-button");
 createButton.addEventListener("click", () => {
   modalMode = "create";
+
+  const modalTitle = document.querySelector(".modal__title");
   modalTitle.textContent = "New Application";
 
   openModal();
 });
 
-// close modal
 const closeModal = () => {
+  const modal = document.getElementById("modal");
+
+  const modalForm = document.querySelector(".modal__form");
   modalForm.reset();
 
   modalMode = "create";
@@ -49,13 +38,17 @@ const closeModal = () => {
   modal.style.display = "none";
 };
 
+const closeButton = document.querySelector(".modal__close-button");
 closeButton.addEventListener("click", closeModal);
 
-// modal submit
+const submitButton = document.querySelector(".modal__submit-button");
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
 
+  const roleInput = document.querySelector(`.modal__input[name="role"]`);
   const role = roleInput.value.trim();
+
+  const companyInput = document.querySelector(`.modal__input[name="company"]`);
   const company = companyInput.value.trim();
 
   if (!role || !company) return;
@@ -71,7 +64,7 @@ submitButton.addEventListener("click", (event) => {
   renderItems();
 });
 
-// open kebab menu
+const container = document.querySelector(".container");
 container.addEventListener("click", (event) => {
   const itemButton = event.target.closest(".item__button"); // .closest traverses up dom tree from event target
   if (!itemButton) return; // if there's no items on the board, there'll be no kebab buttons to be found
@@ -104,10 +97,15 @@ container.addEventListener("click", (event) => {
   const application = applications.find((app) => app.id === applicationId);
   if (!application) return;
 
+  const roleInput = document.querySelector(`.modal__input[name="role"]`);
   roleInput.value = application.role;
+
+  const companyInput = document.querySelector(`.modal__input[name="company"]`);
   companyInput.value = application.company;
 
   modalMode = "update";
+
+  const modalTitle = document.querySelector(".modal__title");
   modalTitle.textContent = "Update Application";
 
   openModal();
