@@ -6,10 +6,7 @@ import {
 } from "../crud.js";
 import { renderItems } from "./render.js";
 
-// state
-let applicationId = null;
-let modalMode = "create";
-
+// modal
 const openModal = () => {
   const modal = document.getElementById("modal");
 
@@ -19,21 +16,23 @@ const openModal = () => {
 const closeModal = () => {
   const modal = document.getElementById("modal");
 
-  const modalForm = document.querySelector(".modal__form");
+  const modalForm = modal.querySelector(".modal__form");
+  delete modalForm.dataset.applicationId;
   modalForm.reset();
-
-  modalMode = "create";
-  applicationId = null;
 
   modal.style.display = "none";
 };
 
 const createButton = document.getElementById("create-button");
 createButton.addEventListener("click", () => {
-  modalMode = "create";
+  const modal = document.getElementById("modal");
 
   const modalTitle = document.querySelector(".modal__title");
   modalTitle.textContent = "New Application";
+
+  const modalForm = modal.querySelector(".modal__form");
+  delete modalForm.dataset.applicationId;
+  modalForm.reset();
 
   openModal();
 });
@@ -41,8 +40,8 @@ createButton.addEventListener("click", () => {
 const closeButton = document.querySelector(".modal__close-button");
 closeButton.addEventListener("click", closeModal);
 
-const submitButton = document.querySelector(".modal__submit-button");
-submitButton.addEventListener("click", (event) => {
+const modalForm = modal.querySelector(".modal__form");
+modalForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const roleInput = document.querySelector(`.modal__input[name="role"]`);
@@ -53,10 +52,12 @@ submitButton.addEventListener("click", (event) => {
 
   if (!role || !company) return;
 
-  if (modalMode === "create") {
-    createApplication(role, company);
-  } else if (modalMode === "update") {
+  const applicationId = modalForm.dataset.applicationId;
+
+  if (applicationId) {
     updateApplication(applicationId, { role, company });
+  } else {
+    createApplication(role, company);
   }
 
   closeModal();
@@ -64,6 +65,7 @@ submitButton.addEventListener("click", (event) => {
   renderItems();
 });
 
+// kebab
 export const addKebabListeners = (item) => {
   // open kebab menu
   const itemButton = item.querySelector(".item__button");
@@ -87,9 +89,8 @@ export const addKebabListeners = (item) => {
 
   // update application
   const updateButton = item.querySelector(".item__update-button");
-
   updateButton.addEventListener("click", () => {
-    applicationId = item.dataset.id;
+    const applicationId = item.dataset.id;
 
     const application = applications.find((app) => app.id === applicationId);
     if (!application) return;
@@ -102,10 +103,11 @@ export const addKebabListeners = (item) => {
     );
     companyInput.value = application.company;
 
-    modalMode = "update";
-
     const modalTitle = document.querySelector(".modal__title");
     modalTitle.textContent = "Update Application";
+
+    const modalForm = modal.querySelector(".modal__form");
+    modalForm.dataset.applicationId = applicationId;
 
     openModal();
 
@@ -115,11 +117,11 @@ export const addKebabListeners = (item) => {
 
   // delete application
   const deleteButton = item.querySelector(".item__delete-button");
-
   deleteButton.addEventListener("click", () => {
-    applicationId = item.dataset.id;
+    const applicationId = item.dataset.id;
 
     deleteApplication(applicationId);
+
     renderItems();
   });
 };
