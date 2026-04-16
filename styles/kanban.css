@@ -1,7 +1,10 @@
 /* TODO: clean all ts up */
 
 .kanban {
-  height: 100vh;
+  min-height: 100vh;
+  /* TODO: fix, can't see entire board on mobile */
+  max-width: 100vw;
+  overflow-x: auto;
 
   display: flex;
   justify-content: center;
@@ -34,7 +37,7 @@
 }
 .column__title {
   font-weight: 600;
-  font-size: 1rem;
+  font: var(--title);
 }
 .column__description {
   color: var(--subtext);
@@ -42,7 +45,7 @@
 }
 .column__count {
   border: var(--border);
-  border-radius: var(--circle);
+  border-radius: var(--radius);
 
   padding: 0.125rem 0.5rem;
 
@@ -52,7 +55,7 @@
   width: 0.625rem;
   height: 0.625rem;
 
-  border-radius: var(--circle);
+  border-radius: var(--radius);
 }
 #apply .column__dot {
   background-color: var(--apply);
@@ -81,70 +84,4 @@
   height: 100%;
 
   scrollbar-width: none;
-}
-
-.item {
-  background-color: white;
-
-  list-style: none;
-
-  padding: var(--space-1);
-
-  border: var(--border);
-  border-radius: var(--radius);
-
-  cursor: grab;
-}
-.item:active {
-  cursor: grabbing; /* TODO: for some reason mouse is error symbol when dragging */
-}
-.item__details {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  position: relative;
-}
-.item__role {
-}
-.item__button {
-  background: transparent;
-  border: none;
-}
-/* TODO: animate it so that it fades in from right to left upon appearance */
-.item__options {
-  position: absolute;
-  right: 0%;
-  top: 105%;
-  z-index: 50;
-
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: var(--space-1);
-
-  box-shadow: var(--shadow);
-  border: var(--border);
-  border-radius: var(--radius);
-
-  padding: var(--space-1);
-
-  background-color: white;
-}
-/* TODO: each option (edit and delete) needs hover effects */
-.item__options button {
-  background-color: transparent;
-  border: none;
-
-  color: var(--subtext);
-}
-.item__company {
-  color: var(--subtext);
-}
-.item__date {
-  color: var(--subtext);
-
-  font-size: 0.75rem;
-
-  margin-top: 1ch;
 }

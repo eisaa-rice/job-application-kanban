@@ -52,9 +52,9 @@ export const renderItems = () => {
       <button class="item__button" type="button">⁝</button>
 
       <div class="item__menu" style="display: none;">
-        <button class="item__update-button" type="button">✏️ Edit</button>
+        <button class="item__update-button" type="button">Edit</button>
 
-        <button class="item__delete-button" type="button">🗑️ Delete</button>
+        <button class="item__delete-button" type="button">Delete</button>
       </div>
     </div>
 

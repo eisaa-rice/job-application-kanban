@@ -20,3 +20,5 @@ persist data with localStorage
 update counts in each column
 
 - on create, move around, and remove
+
+<!-- TODO: styling effects on hover and focus -->

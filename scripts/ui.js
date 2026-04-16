@@ -7,7 +7,6 @@ import {
 import { renderItems } from "./render.js";
 
 // modal
-
 const openModal = () => {
   const modal = document.getElementById("modal");
   modal.showModal();
