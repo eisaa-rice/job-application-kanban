@@ -22,7 +22,7 @@ applications are stored in localstorage and loaded on page refresh. each applica
 
 rendering is handled manually by rebuilding the dom when changes occur, and drag-and-drop updates both the ui and underlying data.
 
-### 🙂‍↕️ what i learned
+### 💡 what i learned
 
 the biggest thing i took away from this project is that i finally wrote raw javascript to update the dom. not having to mess with the dom is one of react's main benefits, but that level of abstraction always felt like a gap in my understanding, especially when people would talk about "web dev fundamentals".
 
